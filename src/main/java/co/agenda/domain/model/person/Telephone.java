@@ -1,10 +1,9 @@
-package co.agenda.domain.model.contact;
+package co.agenda.domain.model.person;
 
 import common.AlwaysValidEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import java.io.Serializable;
 
 /**
@@ -13,14 +12,14 @@ import java.io.Serializable;
 @Embeddable
 public class Telephone implements AlwaysValidEntity, Serializable {
 
-    /**
-     * identifier serve as a description for the number.
-     * Example: Main, Home, Work, Etc.
-     */
-    @Column private String number;
+    @Column(name = "telephone")
+    private String number;
 
     public Telephone(String number){
         setNumber(number);
+    }
+
+    protected Telephone() {
     }
 
     private void setNumber(String number){

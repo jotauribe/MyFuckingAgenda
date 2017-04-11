@@ -2,7 +2,7 @@ package co.agenda.infrastructure.domain.model.contact;
 
 import co.agenda.domain.model.contact.Contact;
 import co.agenda.domain.model.contact.ContactRepository;
-import co.agenda.domain.model.contact.Telephone;
+import co.agenda.domain.model.person.Telephone;
 
 import javax.persistence.EntityManager;
 
@@ -14,7 +14,7 @@ public class HibernateContactRepository implements ContactRepository{
     private EntityManager entityManager;
 
     @Override
-    public void addContact(Contact aContact) {
+    public void addContact(Contact aPerson) {
 
     }
 

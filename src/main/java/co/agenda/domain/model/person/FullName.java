@@ -1,4 +1,4 @@
-package co.agenda.domain.model.contact;
+package co.agenda.domain.model.person;
 
 import common.AlwaysValidEntity;
 
@@ -13,20 +13,22 @@ import java.io.Serializable;
 @Embeddable
 public class FullName implements AlwaysValidEntity, Serializable{
 
-    @Column private String name;
-    @Column private String lastName;
+    @Column(name = "firstname", columnDefinition = "VARCHAR(64)")
+    private String firstName;
+    @Column(name = "lastname", columnDefinition = "VARCHAR(64)")
+    private String lastName;
 
-    public FullName(){}
+    protected FullName(){}
 
-    public FullName(String name, String lastName){
-        setName(name);
+    public FullName(String firstName, String lastName){
+        setFirstName(firstName);
         setLastName(lastName);
     }
 
-    private void setName(String name){
+    private void setFirstName(String name){
         assertArgumentNotNull(name, "Name can not be null");
         assertArgumentLength(name, 16, 1, "Invalid Name Length");
-        this.name = name;
+        this.firstName = name;
     }
 
     private void setLastName(String lastName){
@@ -36,33 +38,23 @@ public class FullName implements AlwaysValidEntity, Serializable{
     }
 
     public String name(){
-
-        return this.name;
-
+        return this.firstName;
     }
 
     public String lastName(){
-
         return this.lastName;
-
     }
 
     public FullName change(String name, String lastName){
-
         return new FullName(name, lastName);
-
     }
 
     public FullName changeName(String name){
-
         return new FullName(name, this.lastName);
-
     }
 
     public FullName changeLastName(String lastName){
-
-        return new FullName(this.name, lastName);
-
+        return new FullName(this.firstName, lastName);
     }
 
     @Override
@@ -72,13 +64,13 @@ public class FullName implements AlwaysValidEntity, Serializable{
 
         FullName fullName = (FullName) o;
 
-        if (!name.equals(fullName.name)) return false;
+        if (!firstName.equals(fullName.firstName)) return false;
         return lastName.equals(fullName.lastName);
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
+        int result = firstName.hashCode();
         result = 31 * result + lastName.hashCode();
         return result;
     }
@@ -86,7 +78,7 @@ public class FullName implements AlwaysValidEntity, Serializable{
     @Override
     public String toString() {
         return "FullName{" +
-                "name='" + name + '\'' +
+                "name='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }

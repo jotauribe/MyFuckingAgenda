@@ -12,10 +12,10 @@ import java.util.UUID;
 @Embeddable
 public class UserIdentity implements Serializable {
 
-    @Column
+    @Column(name = "id", columnDefinition = "varchar(32)")
     private String identity;
 
-    public UserIdentity() {}
+    protected UserIdentity() {}
 
     private UserIdentity(String aIdentity){
         this.identity = identity;

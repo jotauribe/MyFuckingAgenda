@@ -12,7 +12,7 @@ import javax.persistence.PersistenceContext;
  */
 
 @Stateless
-public class HibernateUserRepository implements UserRepository{
+public class JpaUserRepository implements UserRepository{
 
     @PersistenceContext(unitName = "DefaultMySqlPersistentUnit")
     private EntityManager entityManager;

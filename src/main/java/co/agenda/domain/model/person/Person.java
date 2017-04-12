@@ -19,6 +19,12 @@ public class Person implements AlwaysValidEntity, Serializable{
     public Person() {
     }
 
+    /**
+     *
+     * @param aFullName New user full name
+     * @param aTelephone New user telephone number
+     * @param aEmailAddress New user email address
+     */
     public Person(FullName aFullName, Telephone aTelephone, EmailAddress aEmailAddress){
         setFullName(aFullName);
         setTelephone(aTelephone);

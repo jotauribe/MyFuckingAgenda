@@ -4,6 +4,7 @@ import co.agenda.domain.model.person.Person;
 import common.AlwaysValidEntity;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 
@@ -15,17 +16,20 @@ public class User implements AlwaysValidEntity{
 
     @EmbeddedId
     private UserIdentity userId;
-    @Column(name = "username")
+
+    @Column(name = "username", unique = true, nullable = false)
     private String userName;
-    @Column(name = "password", columnDefinition = "varchar(64)")
+
+    @Column(name = "password", columnDefinition = "varchar(64)", nullable = false)
     private String passwordHash;
-    @Column
+
+    @Embedded
     private Person person;
 
     protected User() {
     }
 
-    public User(String aUserName, String aPasswordHash, UserIdentity aUserIdentity){
+    public User(String aUserName, String aPasswordHash, UserIdentity aUserIdentity, Person aPerson){
         setUserName(aUserName);
         setPasswordHash(aPasswordHash);
         setId(aUserIdentity);
@@ -49,6 +53,11 @@ public class User implements AlwaysValidEntity{
     protected void setId(UserIdentity id){
         assertArgumentNotNull(id, "An id is required");
         this.userId = id;
+    }
+
+    protected  void setPerson(Person aPerson){
+        assertArgumentNotNull(aPerson, "A non null person object must be provided");
+        this.person = aPerson;
     }
 
     @Override
